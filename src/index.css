@@ -1,0 +1,115 @@
+@font-face {
+  font-family: 'intensa-fuente';
+  src: url('./assets/fonts/IntensaFuente.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  background-color: #222;
+  font-family: 'intensa-fuente', sans-serif;
+  color: white;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+nav {
+  font-size: 25px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+nav a {
+  padding-inline: 10px;
+}
+
+.character-selection, .game-screen, .game-over, .game-title {
+  text-align: center;
+}
+
+.characters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+.game-screen-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+.App{
+  padding: 1em;
+}
+
+img {
+  max-width: 100px;
+  max-height: 100px;
+  cursor: pointer;
+}
+
+.character {
+  font-size: 24px;
+  transition: backgroud-color .4s ease; 
+}
+
+.character:hover{
+  background-color: #888;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+.nextLevelBtn, .gameOverBtn{
+ padding: 20px 60px;
+ font-size: 16px;
+ font-weight: bold;
+ color: white;
+ border-radius: 20px;
+ border: 3px solid blueviolet;
+ background-color: transparent;
+ cursor: pointer;
+ transition: backgroud-color .4s ease; 
+}
+
+.nextLevelBtn:hover, .gameOverBtn:hover{
+  background-color: #888;
+}
+
+/* Estilo para el fondo semitransparente */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté encima de los demás elementos */
+}
+
+/* Estilo para el cuadro de mensaje */
+.message-box {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para darle un poco de profundidad */
+  z-index: 1001; /* Asegura que el mensaje esté encima del fondo semitransparente */
+  text-align: center;
+}
+
+.stats-box{
+  font-size: xx-large;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px;
+  justify-content: center;
+  text-align: center;
+}
