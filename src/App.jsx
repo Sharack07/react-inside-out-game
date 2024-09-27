@@ -9,6 +9,7 @@ function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [characters, setCharacters] = useState([]);
   const [isCharacterSelected, setIsCharacterSelected] = useState(false);
+  //const {gameOverMessage, setGameOverMessage} = useState("");
 
   const handleCharacterSelect = (char) => {
     setCharacter(char);
@@ -25,8 +26,8 @@ function App() {
     setIsCharacterSelected(false);
   };
 
-  function handleKeyDown(e){
-    console.log(e)
+  function handleKeyDown(e) {
+    console.log(e);
   }
 
   useEffect(() => {
@@ -74,29 +75,35 @@ function App() {
   }, []);
 
   return (
-    <div className="App" onKeyDown={(e) => handleKeyDown(e)}>
-      <nav>
-        <a href="/intensamente">Intensamente</a>
-        <a href="/memorama">Memorama</a>
-      </nav>
-      <div className="game-title">
-        <h1>Juego de Intensamente de Ana Pau 💙</h1>
+    <div className="app-container" onKeyDown={(e) => handleKeyDown(e)}>
+      <div className="header">
+        <div className="game-title">Juego de Intensamente de Ana Pau 💙</div>
+        <div>
+          <nav>
+            <a href="/intensamente">Intensamente</a>
+            <a href="/memorama">Memorama</a>
+          </nav>
+        </div>
       </div>
-      {!isCharacterSelected && (
-        <CharacterSelection
-          onCharacterSelect={handleCharacterSelect}
-          characters={characters}
-        />
-      )}
-      {isCharacterSelected && (
-        <GameScreen
-          character={character}
-          characters={characters}
-          onGameOver={handleGameOver}
-          onWin={handlWin}
-        />
-      )}
-      {isGameOver && <GameOverScreen onRestart={handleRestart} />}
+      <div>
+        {!isCharacterSelected && (
+          <CharacterSelection
+            onCharacterSelect={handleCharacterSelect}
+            characters={characters}
+          />
+        )}
+      </div>
+      <div>
+        {isCharacterSelected && (
+          <GameScreen
+            character={character}
+            characters={characters}
+            onGameOver={() => handleGameOver()}
+            onWin={handlWin}
+          />
+        )}
+      </div>
+      <div>{isGameOver && <GameOverScreen onRestart={handleRestart} />}</div>
     </div>
   );
 }

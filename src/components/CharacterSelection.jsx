@@ -10,28 +10,30 @@ export default function CharacterSelection({ onCharacterSelect, characters }) {
 
   return (
     <>
-      <div className="game-title">
+      <div className="choose-character">
         <h2>Elige un personaje</h2>
       </div>
-      <div className="character-selection">
-        <animated.div
-          className="characters"
-          style={useSpring({
-            transform: "scale(1)",
-            from: { transform: "scale(0.5)" },
-          })}
-        >
-          {characters.map((char) => (
-            <div
-              key={char.name}
-              onClick={() => onCharacterSelect(char, characters)}
-              className="character"
-            >
-              <img src={char.image} alt={char.name} />
-              <p>{char.name}</p>
-            </div>
-          ))}
-        </animated.div>
+      <div className="selection-container">
+        <div className="character-selection">
+          <animated.div
+            className="characters"
+            style={useSpring({
+              transform: "scale(1)",
+              from: { transform: "scale(0.5)" },
+            })}
+          >
+            {characters.map((char) => (
+              <div
+                key={char.name}
+                onClick={() => onCharacterSelect(char, characters)}
+                className="character"
+              >
+                <img src={char.image} alt={char.name} />
+                <p>{char.name}</p>
+              </div>
+            ))}
+          </animated.div>
+        </div>
       </div>
     </>
   );

@@ -13,14 +13,16 @@ export default function GameScreen({
   const [isGameStart, setIsGameStart] = useState(false);
   const [timesGuessed, setTimesGuessed] = useState(0);
   const [level, setLevel] = useState(1);
-  const [charactersByLevel, setcharactersByLevel] = useState(29);
+  //const [charactersByLevel, setcharactersByLevel] = useState(29);
   const [isNextLevel, setIsNextLevel] = useState(false);
   const [totalRightCharacters, setTotalRightCharacters] = useState(3);
+  const [totalErrors, setTotalErrors] = useState(0);
 
   const handleNextLevel = () => {
     console.log("Avanzar al siguiente nivel");
-    setTimeLeft(20 - level * 2);
+    setTimeLeft(timeLeft - level * 2);
     setTimesGuessed(0);
+    setTotalErrors(0);
     setTotalRightCharacters(totalRightCharacters + 1);
   };
 
@@ -32,9 +34,15 @@ export default function GameScreen({
       setCharactersInGame(
         charactersInGame.filter((c) => c.id !== guessChar.id)
       );
+
       setTimesGuessed(timesGuessed + 1);
-      console.log("timesGuessed: " + timesGuessed);
+      if (level >= 6 && level <= 8) {
+        setTimeLeft(timeLeft + 1);
+      } else if (level >= 9 && level <= 12) {
+        setTimeLeft(timeLeft + 2);
+      }
     } else {
+      setTotalErrors(totalErrors + 1);
       console.log("Seguir intentando");
     }
   };
@@ -47,7 +55,7 @@ export default function GameScreen({
       // Donde Nvles 1, 2, 3, 4, 5
       console.log("Personajes correctos: " + totalRightCharacters);
       let gameCharacters = Array(totalRightCharacters).fill(character);
-      let gameCharactersWithId = Array(30 + level * 2);
+      let gameCharactersWithId = Array(34 + level * 2);
 
       console.log("Nivel: " + level);
       console.log("Personajes correctos: " + totalRightCharacters);
@@ -82,7 +90,7 @@ export default function GameScreen({
     // Y cuando avance de nivel
     if (!isGameStart) {
       console.log("Inicializar nivel");
-      setTimeLeft(20 - level * 2);
+      setTimeLeft(timeLeft - level * 2);
       setTotalRightCharacters(2 + level);
       //setTimesGuessed(0);
       setCharactersInGame(generateCharacters());
@@ -90,9 +98,13 @@ export default function GameScreen({
 
     if (timeLeft > 0) {
       if (timesGuessed < totalRightCharacters) {
-        setIsGameStart(true);
-        const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-        return () => clearTimeout(timer);
+        if (totalErrors === 3) {
+          onGameOver("¡Te equivocaste 3 veces!");
+        } else {
+          setIsGameStart(true);
+          const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+          return () => clearTimeout(timer);
+        }
       } else {
         console.log("Avanza al nivel: " + level);
         setIsNextLevel(true);
@@ -100,7 +112,7 @@ export default function GameScreen({
         setIsGameStart(false);
       }
     } else {
-      onGameOver();
+      onGameOver("¡Se te acabó el tiempo!");
     }
   }, [timeLeft]);
 
@@ -109,19 +121,27 @@ export default function GameScreen({
       {isNextLevel && !isGameStart && (
         <NextLevel onNextLevel={handleNextLevel} />
       )}
-      <div className="stats-box">
-        <p>
-          {character.name} escondidos: {totalRightCharacters - timesGuessed}
-        </p>
-        <p>Tiempo restante: {timeLeft}</p>
-        <p>Errores: 0</p>
+      <div className="game-stats">
+        <div>Nivel {level}</div>
+        <div className="time-added-byLevel">
+          {level >= 6 && level <=8 && (<p>⏱️ +1 seg</p>)}
+          {level >= 9 && level <=12 && (<p>⏱️ +2 seg</p>)}
+        </div>
+        <div className="stats-selected-character">
+          <img src={character.image} alt={character.name} />
+        </div>
+        <div>x {totalRightCharacters - timesGuessed}</div>
+        <div>⏱️</div>
+        <div>{timeLeft}</div>
+        <div>❌</div>
+        <div>{totalErrors}</div>
       </div>
-      <animated.div
+      {/* <animated.div
         style={useSpring({
           transform: "scale(1)",
           from: { transform: "scale(0.8)" },
         })}
-      >
+      > */}
         <div className="game-screen-grid">
           {charactersInGame.map((c, i) => (
             <div key={c.name + i} className="character">
@@ -130,11 +150,12 @@ export default function GameScreen({
                 src={c.image}
                 alt={c.name}
                 onClick={(e) => onGuessCharacter(c, i)}
+                className="img-char-game"
               />
             </div>
           ))}
         </div>
-      </animated.div>
+      {/* </animated.div> */}
     </>
   );
 }

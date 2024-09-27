@@ -1,31 +1,33 @@
 @font-face {
-  font-family: 'intensa-fuente';
-  src: url('./assets/fonts/IntensaFuente.ttf') format('truetype');
+  font-family: "intensa-fuente";
+  src: url("./assets/fonts/IntensaFuente.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
-body{
+body {
   background-color: #222;
-  font-family: 'intensa-fuente', sans-serif;
+  font-family: "intensa-fuente", sans-serif;
   color: white;
   padding: 0;
   margin: 0;
   justify-content: center;
 }
 
-nav {
-  font-size: 25px;
-  text-align: center;
-  margin: 0 auto;
+.game-title {
+  font-size: 35px;
 }
 
-nav a {
-  padding-inline: 10px;
+.character-selection,
+.game-screen,
+.game-over,
+.game-title,
+.choose-character {
+  text-align: center;
 }
 
-.character-selection, .game-screen, .game-over, .game-title {
-  text-align: center;
+.choose-character {
+  font-size: 20px;
 }
 
 .characters {
@@ -37,27 +39,57 @@ nav a {
 
 .game-screen-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns:  repeat(auto-fill, minmax(100px, 1fr));
   gap: 10px;
   text-align: center;
+  margin: auto;
+  max-width: 70%;
 }
 
-.App{
-  padding: 1em;
+.selection-container {
+  width: 70%;
+  margin: auto;
 }
 
-img {
-  max-width: 100px;
-  max-height: 100px;
+.header {
+  padding: 30px 0;
+}
+
+.app-container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  font-size: 25px;
+  text-align: center;
+  margin: 0 auto;
+  color: #aaa;
+}
+
+nav a {
+  padding-inline: 20px;
+}
+
+.character img {
+  max-width: 90px;
+  max-height: 90px;
+  cursor: pointer;
+}
+
+img-char-game {
+  max-width: 50px !important;
+  max-height: 50px !important;
   cursor: pointer;
 }
 
 .character {
   font-size: 24px;
-  transition: backgroud-color .4s ease; 
+  transition: backgroud-color 0.4s ease;
 }
 
-.character:hover{
+.character:hover {
   background-color: #888;
 }
 
@@ -65,19 +97,21 @@ h1 {
   font-size: 40px;
 }
 
-.nextLevelBtn, .gameOverBtn{
- padding: 20px 60px;
- font-size: 16px;
- font-weight: bold;
- color: white;
- border-radius: 20px;
- border: 3px solid blueviolet;
- background-color: transparent;
- cursor: pointer;
- transition: backgroud-color .4s ease; 
+.nextLevelBtn,
+.gameOverBtn {
+  padding: 20px 60px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border-radius: 20px;
+  border: 3px solid blueviolet;
+  background-color: transparent;
+  cursor: pointer;
+  transition: backgroud-color 0.4s ease;
 }
 
-.nextLevelBtn:hover, .gameOverBtn:hover{
+.nextLevelBtn:hover,
+.gameOverBtn:hover {
   background-color: #888;
 }
 
@@ -105,11 +139,90 @@ h1 {
   text-align: center;
 }
 
-.stats-box{
+.stats-box {
   font-size: xx-large;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   justify-content: center;
   text-align: center;
+}
+
+/* Estadísticas del juego fijas */
+.game-stats {
+  max-width: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 10px;
+  font-size: xx-large;
+  text-align: center;
+  align-items: center;
+  position: fixed; /* Fija el elemento en la pantalla */
+  margin-top: auto;
+  left: 10px; /* A 10px del borde derecho */
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 999; /* Asegura que esté por encima de otros elementos */
+}
+
+.stats-selected-character img {
+  max-width: 65px;
+  max-height: 65px;
+}
+
+.time-added-byLevel{
+  font-size: 20px;
+}
+
+/* --------------- MEDIA QUERIES ---------------*/
+@media screen and (max-width: 1000px) {
+  .app-container {
+    height: 100vh;
+  }
+  
+  .app-container .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .app-container .header .game-title {
+    font-size: 30px;
+  }
+
+  /* Estadísticas del juego fijas */
+  .game-stats {
+    max-width: 70%;
+    height: 75px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: auto;
+    position: fixed; /* Fija el elemento en la pantalla */
+    bottom: 10px; /* A 10px del borde superior */
+    left: 10px; /* A 10px del borde derecho */
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    color: white;
+    padding: 5px;
+    border-radius: 20px;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  }
+
+  .game-screen-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-height: calc(100vh - 250px); /* Altura máxima, restando la altura de las estadísticas */
+    max-width: 95%; /* Altura máxima, restando la altura de las estadísticas */
+    text-align: center;
+    overflow-y: auto; /* Permite el scroll solo en este contenedor */
+  }
+
+  .stats-selected-character img {
+    max-width: 45px;
+    max-height: 45px;
+  }
 }
