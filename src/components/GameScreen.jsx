@@ -20,7 +20,7 @@ export default function GameScreen({
 
   const handleNextLevel = () => {
     console.log("Avanzar al siguiente nivel");
-    setTimeLeft(timeLeft - level * 2);
+    setTimeLeft(20 - level * 2);
     setTimesGuessed(0);
     setTotalErrors(0);
     setTotalRightCharacters(totalRightCharacters + 1);
