@@ -90,7 +90,7 @@ export default function GameScreen({
     // Y cuando avance de nivel
     if (!isGameStart) {
       console.log("Inicializar nivel");
-      setTimeLeft(timeLeft - level * 2);
+      setTimeLeft(20 - level * 2);
       setTotalRightCharacters(2 + level);
       //setTimesGuessed(0);
       setCharactersInGame(generateCharacters());
