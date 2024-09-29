@@ -101,7 +101,7 @@ function App() {
       </div>
       <div>{isGameOver && <GameOverScreen onRestart={handleRestart} />}</div>
       <div className="game-version">
-        <p>Sharack Web Apps 2024 - Versión 1.0.5</p>
+        <p>Sharack Web Apps 2024 - Versión 1.0.6</p>
       </div>
     </div>
   );
