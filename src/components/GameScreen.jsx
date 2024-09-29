@@ -74,6 +74,7 @@ export default function GameScreen({
       // console.log("Personajes correctos: " + totalRightCharacters);
       // console.log("Personajes en juego: " + gameCharactersWithId.length);
       // console.log("Veces adivinado: " + timesGuessed);
+      console.log("Instructions: " + readIntructions);
 
       // Rellenar el resto del arreglo con personajes aleatorios
       // Se resta el número de personajes correctos por nivel
@@ -124,7 +125,7 @@ export default function GameScreen({
             return () => clearTimeout(timer);
           }
         } else {
-          //console.log("Avanza al nivel: " + level);
+          console.log("Avanza al nivel: " + level);
           setIsNextLevel(true);
           setLevel(level + 1);
           setIsGameStart(false);
@@ -182,6 +183,8 @@ export default function GameScreen({
         <div className="overlay">
           <div className="message-box">
             <h1>¡Encuentra todos los {character.name}!</h1>
+            <h2>Si se te acaba el tiempo</h2>
+            <h2>o te equivocas 3 veces, pierdes</h2>
             <button
               className="continueGameBtn"
               onClick={toggleReadInstructions}
