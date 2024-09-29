@@ -26,10 +26,6 @@ function App() {
     setIsCharacterSelected(false);
   };
 
-  function handleKeyDown(e) {
-    console.log(e);
-  }
-
   useEffect(() => {
     setCharacters([
       {
@@ -75,9 +71,9 @@ function App() {
   }, []);
 
   return (
-    <div className="app-container" onKeyDown={(e) => handleKeyDown(e)}>
+    <div className="app-container">
       <div className="header">
-        <div className="game-title">Juego de Intensamente de Ana Pau 💙</div>
+        <div className="game-title">Juego de Intensamente de Ana Pau 💜</div>
         <div>
           <nav>
             <a href="/intensamente">Intensamente</a>

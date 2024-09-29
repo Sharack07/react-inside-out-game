@@ -14,6 +14,10 @@ body {
   justify-content: center;
 }
 
+p {
+  color: white;
+}
+
 .game-title {
   font-size: 35px;
 }
@@ -98,7 +102,8 @@ h1 {
 }
 
 .nextLevelBtn,
-.gameOverBtn {
+.gameOverBtn,
+.continueGameBtn {
   padding: 20px 60px;
   font-size: 16px;
   font-weight: bold;
@@ -110,6 +115,24 @@ h1 {
   transition: backgroud-color 0.4s ease;
 }
 
+.pauseGameBtn {
+  padding: 5px;
+  border: 0px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: backgroud-color 0.4s ease;
+  align-items: center;
+}
+
+.pauseGameBtn img{
+  width: 40px;
+  padding: 1;
+}
+
+.pauseGameBtn img:hover{
+  width: 50px;
+  transition:  0.2s ease;
+}
 .nextLevelBtn:hover,
 .gameOverBtn:hover {
   background-color: #888;
@@ -139,15 +162,6 @@ h1 {
   text-align: center;
 }
 
-.stats-box {
-  font-size: xx-large;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  justify-content: center;
-  text-align: center;
-}
-
 /* Estadísticas del juego fijas */
 .game-stats {
   max-width: 5%;
@@ -155,6 +169,7 @@ h1 {
   flex-direction: column;
   justify-content: space-around;
   gap: 10px;
+  padding: 10px;
   font-size: xx-large;
   text-align: center;
   align-items: center;
@@ -165,7 +180,6 @@ h1 {
   background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
   color: white;
   border-radius: 5px;
-  padding: 10px;
   z-index: 999; /* Asegura que esté por encima de otros elementos */
 }
 
@@ -209,7 +223,7 @@ h1 {
     color: white;
     padding: 5px;
     border-radius: 20px;
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    z-index: 999; /* Asegura que esté por encima de otros elementos */
   }
 
   .game-screen-grid {
